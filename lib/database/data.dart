@@ -7,6 +7,15 @@ class Note {
   @ColumnInfo(name: 'title')
   String title;
   String description;
+  String photo;
+  String emoji;
+  String dueDate;
 
-  Note({this.id, required this.title, required this.description});
+  Note(
+      {this.id,
+      required this.title,
+      required this.description,
+      required this.photo,
+      required this.emoji,
+      required this.dueDate});
 }

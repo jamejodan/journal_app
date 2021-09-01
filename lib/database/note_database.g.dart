@@ -81,7 +81,7 @@ class _$NoteDatabase extends NoteDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `note` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `description` TEXT NOT NULL)');
+            'CREATE TABLE IF NOT EXISTS `note` (`id` INTEGER PRIMARY KEY AUTOINCREMENT, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `photo` TEXT NOT NULL, `emoji` TEXT NOT NULL, `dueDate` TEXT NOT NULL)');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -104,7 +104,10 @@ class _$NoteDao extends NoteDao {
             (Note item) => <String, Object?>{
                   'id': item.id,
                   'title': item.title,
-                  'description': item.description
+                  'description': item.description,
+                  'photo': item.photo,
+                  'emoji': item.emoji,
+                  'dueDate': item.dueDate
                 },
             changeListener);
 
@@ -122,7 +125,10 @@ class _$NoteDao extends NoteDao {
         mapper: (Map<String, Object?> row) => Note(
             id: row['id'] as int?,
             title: row['title'] as String,
-            description: row['description'] as String),
+            description: row['description'] as String,
+            photo: row['photo'] as String,
+            emoji: row['emoji'] as String,
+            dueDate: row['dueDate'] as String),
         queryableName: 'note',
         isView: false);
   }
