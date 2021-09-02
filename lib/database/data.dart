@@ -8,7 +8,8 @@ class Note {
   String title;
   String description;
   String photo;
-  String emoji;
+  int emoji;
+  int weather;
   String dueDate;
 
   Note(
@@ -17,5 +18,6 @@ class Note {
       required this.description,
       required this.photo,
       required this.emoji,
+      required this.weather,
       required this.dueDate});
 }

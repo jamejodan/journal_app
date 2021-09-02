@@ -7,6 +7,30 @@ import 'package:journal_app/database/notedao.dart';
 class HomeWidget extends StatelessWidget {
   final NoteDao noteDao = Get.find();
 
+  IconData getEmoji(int? selectIndex) {
+    if (selectIndex == 0) {
+      return Icons.emoji_emotions;
+    } else if (selectIndex == 1) {
+      return Icons.verified;
+    } else if (selectIndex == 2) {
+      return Icons.safety_divider;
+    } else {
+      return Icons.person;
+    }
+  }
+
+  IconData getWeather(int? selectedWeather) {
+    if (selectedWeather == 0) {
+      return Icons.wb_sunny_outlined;
+    } else if (selectedWeather == 1) {
+      return Icons.wb_cloudy_outlined;
+    } else if (selectedWeather == 2) {
+      return Icons.wb_shade_outlined;
+    } else {
+      return Icons.wb_incandescent_outlined;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -108,8 +132,8 @@ class HomeWidget extends StatelessWidget {
                                 height: 30,
                                 color: Colors.white60,
                                 child: Center(
-                                  child: Text(
-                                    data.data![positioned].emoji.toString(),
+                                  child: Icon(
+                                    getWeather(data.data![positioned].weather),
                                   ),
                                 ),
                               ),
@@ -119,8 +143,9 @@ class HomeWidget extends StatelessWidget {
                                 height: 30,
                                 color: Colors.white60,
                                 child: Center(
-                                  child:
-                                      Text('${data.data![positioned].emoji}'),
+                                  child: Icon(
+                                    getEmoji(data.data![positioned].emoji),
+                                  ),
                                 ),
                               )
                             ],

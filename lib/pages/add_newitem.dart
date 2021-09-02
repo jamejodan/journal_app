@@ -1,3 +1,4 @@
+import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
@@ -11,7 +12,7 @@ class AddNewItem extends StatefulWidget {
 
 class _AddNewItemState extends State<AddNewItem> {
   var selectedDate = DateTime.now();
-  var selectedIndex = 1;
+  int selectedIndex = 1;
 
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController descriptioncontroller = TextEditingController();
@@ -31,11 +32,11 @@ class _AddNewItemState extends State<AddNewItem> {
       }
     }
 
-    List<String> emoList = [
-      '${Icons.emoji_emotions}',
-      '${Icons.ac_unit}',
-      '${Icons.baby_changing_station}',
-      '${Icons.cabin}',
+    List<IconData> emoList = [
+      Icons.emoji_emotions,
+      Icons.ac_unit,
+      Icons.baby_changing_station,
+      Icons.cabin,
     ];
 
     return Scaffold(
@@ -101,7 +102,7 @@ class _AddNewItemState extends State<AddNewItem> {
                   margin: EdgeInsets.only(top: 10),
                   //padding: EdgeInsets.symmetric(vertical: 10),
                   child: ListView.builder(
-                    itemCount: 4,
+                    itemCount: emoList.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (_, index) => Padding(
                       padding: const EdgeInsets.only(left: 20),
@@ -124,14 +125,12 @@ class _AddNewItemState extends State<AddNewItem> {
                                     ? Colors.white
                                     : Colors.grey),
                           ),
-                          child: Text('${emoList[index]}'),
-                          // child: Icon(
+                          // child: Text('${emoList[index]}'),
+                          child: Icon(emoList[index],
+                              color: selectedIndex == index
+                                  ? Color(0xFf2b7379)
+                                  : Colors.grey[400]),
 
-                          //   size: 30,
-                          //   color: selectedMood == index
-                          //       ? Color(0xFf2b7379)
-                          //       : Colors.grey[400],
-                          // ),
                           padding: EdgeInsets.all(10),
                         ),
                       ),
@@ -221,7 +220,8 @@ class _AddNewItemState extends State<AddNewItem> {
                           title: titlecontroller.text,
                           description: descriptioncontroller.text,
                           photo: '',
-                          emoji: '',
+                          emoji: selectedIndex,
+                          weather: 1,
                           dueDate: selectedDate.toString(),
                         ),
                       );
