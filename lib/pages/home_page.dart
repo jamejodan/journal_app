@@ -3,6 +3,7 @@ import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
 import 'package:journal_app/database/notedao.dart';
 import 'package:journal_app/pages/add_newitem.dart';
+import 'package:journal_app/pages/profile_page.dart';
 
 import 'home_widget.dart';
 
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   final tabs = [
     HomeWidget(),
     AddNewItem(),
+    ProfilePage(),
   ];
 
   @override

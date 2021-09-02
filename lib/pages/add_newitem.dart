@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/route_manager.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:journal_app/database/data.dart';
 import 'package:journal_app/database/notedao.dart';
 
@@ -13,6 +16,8 @@ class AddNewItem extends StatefulWidget {
 class _AddNewItemState extends State<AddNewItem> {
   var selectedDate = DateTime.now();
   int selectedIndex = 1;
+  File? _image;
+  final picker = ImagePicker();
 
   TextEditingController titlecontroller = TextEditingController();
   TextEditingController descriptioncontroller = TextEditingController();
@@ -21,7 +26,6 @@ class _AddNewItemState extends State<AddNewItem> {
   Widget build(BuildContext context) {
     final NoteDao noteDao = Get.find();
 
-    //File openFile;
     //
     //pikerDate = DateTime.now();
     String getText() {
@@ -87,13 +91,10 @@ class _AddNewItemState extends State<AddNewItem> {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                    margin: EdgeInsets.only(top: 10),
-                    height: 220,
-                    width: MediaQuery.of(context).size.width,
-                    color: Colors.grey,
-                    child: Center(
-                      child: Icon(Icons.camera_enhance_rounded),
-                    )),
+                  height: 100,
+                  width: 100,
+                  color: Colors.grey,
+                ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 5, left: 5),
@@ -250,6 +251,14 @@ class _AddNewItemState extends State<AddNewItem> {
       ),
     );
   }
+
+  // void _buildFile() async {
+  //   var image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+  //   setState(() {
+  //     _image = image as File;
+  //   });
+  // }
 
   Future datePicker(BuildContext context) async {
     final date = await showDatePicker(
